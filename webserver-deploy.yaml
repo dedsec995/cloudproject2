@@ -1,2 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
+metadata:
+  name: webserver
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: webserver
+  template:
+    metadata:
+      labels:
+        run: webserver
+    spec:
+      containers:
+      - name: webserver-container
+        image: dedsec995/webserver:v5
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 8080
